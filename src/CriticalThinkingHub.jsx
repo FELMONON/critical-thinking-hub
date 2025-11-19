@@ -7,15 +7,15 @@ const customStyles = `
     .chat-scroll::-webkit-scrollbar { width: 6px; }
     .chat-scroll::-webkit-scrollbar-track { background: transparent; }
     .chat-scroll::-webkit-scrollbar-thumb { background-color: #475569; border-radius: 20px; }
-
+    
     /* Scrollbar for navigation */
-    nav::-webkit-scrollbar { width: 6px; }
-    nav::-webkit-scrollbar-track { background: transparent; }
-    nav::-webkit-scrollbar-thumb { background-color: #334155; border-radius: 20px; }
-    nav::-webkit-scrollbar-thumb:hover { background-color: #475569; }
+    .nav-scroll::-webkit-scrollbar { width: 4px; }
+    .nav-scroll::-webkit-scrollbar-track { background: transparent; }
+    .nav-scroll::-webkit-scrollbar-thumb { background-color: #334155; border-radius: 20px; }
+    .nav-scroll::-webkit-scrollbar-thumb:hover { background-color: #475569; }
 
     /* Smooth scrolling */
-    nav {
+    .nav-scroll {
         scrollbar-width: thin;
         scrollbar-color: #334155 transparent;
     }
@@ -1265,7 +1265,7 @@ const Navigation = ({ activeTab, setActiveTab }) => {
                     </h1>
                     <p className="text-xs text-slate-500 mt-1">Paul-Elder Framework</p>
                 </div>
-                <nav className="flex-1 overflow-y-auto overflow-x-hidden p-3 sm:p-4 space-y-6 overscroll-contain scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
+                <nav className="flex-1 overflow-y-auto p-4 space-y-6">
                     <div>
                         <button
                             onClick={() => { setActiveTab('home'); setMobileMenuOpen(false); }}
