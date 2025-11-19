@@ -7,22 +7,34 @@ const customStyles = `
     .chat-scroll::-webkit-scrollbar { width: 6px; }
     .chat-scroll::-webkit-scrollbar-track { background: transparent; }
     .chat-scroll::-webkit-scrollbar-thumb { background-color: #475569; border-radius: 20px; }
-    
+
+    /* Scrollbar for navigation */
+    nav::-webkit-scrollbar { width: 6px; }
+    nav::-webkit-scrollbar-track { background: transparent; }
+    nav::-webkit-scrollbar-thumb { background-color: #334155; border-radius: 20px; }
+    nav::-webkit-scrollbar-thumb:hover { background-color: #475569; }
+
+    /* Smooth scrolling */
+    nav {
+        scrollbar-width: thin;
+        scrollbar-color: #334155 transparent;
+    }
+
     .typing-dot {
         animation: typing 1.4s infinite ease-in-out both;
     }
     .typing-dot:nth-child(1) { animation-delay: -0.32s; }
     .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-    
+
     @keyframes typing {
         0%, 80%, 100% { transform: scale(0); }
         40% { transform: scale(1); }
     }
-    
+
     .animate-fadeIn {
         animation: fadeIn 0.5s ease-out;
     }
-    
+
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
@@ -1199,20 +1211,20 @@ const Navigation = ({ activeTab, setActiveTab }) => {
 
             {/* Sidebar Navigation */}
             <div className={`
-                fixed md:relative top-0 left-0
+                fixed md:relative top-0 md:top-auto left-0
                 w-72 sm:w-80 md:w-64 bg-slate-900 text-slate-300 h-screen flex flex-col flex-shrink-0 border-r border-slate-800
                 transition-transform duration-300 ease-out z-40
                 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
                 md:translate-x-0
             `}>
-                <div className="p-4 sm:p-6 border-b border-slate-800">
+                <div className="p-4 sm:p-6 border-b border-slate-800 flex-shrink-0">
                     <h1 className="text-xl font-bold text-emerald-400 flex items-center gap-2">
                         <Brain size={24} />
                         Critical Hub
                     </h1>
                     <p className="text-xs text-slate-500 mt-1">Paul-Elder Framework</p>
                 </div>
-                <nav className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-6 overscroll-contain">
+                <nav className="flex-1 overflow-y-auto overflow-x-hidden p-3 sm:p-4 space-y-6 overscroll-contain scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
                     <div>
                         <button
                             onClick={() => { setActiveTab('home'); setMobileMenuOpen(false); }}
@@ -1248,6 +1260,8 @@ const Navigation = ({ activeTab, setActiveTab }) => {
                     <div>
                         <NavButton id="ai-tutor" label="Socratic AI Tutor" icon={Sparkles} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
                     </div>
+                    {/* Bottom padding for mobile */}
+                    <div className="h-20 md:h-4"></div>
                 </nav>
             </div>
         </>
@@ -1279,38 +1293,40 @@ export default function CriticalThinkingHub() {
         <div className="flex h-screen bg-slate-950 text-slate-200 font-sans overflow-hidden">
             <style>{customStyles}</style>
             <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
-            <div className="flex-1 overflow-auto bg-gradient-to-br from-slate-950 to-slate-900 relative flex flex-col pt-16 md:pt-0 overscroll-contain">
-                <div className="flex-1 min-h-0">
-                    {renderContent()}
-                </div>
+            <div className="flex-1 overflow-y-auto overflow-x-hidden bg-gradient-to-br from-slate-950 to-slate-900 relative pt-16 md:pt-0">
+                <div className="min-h-full flex flex-col">
+                    <div className="flex-1">
+                        {renderContent()}
+                    </div>
 
-                {/* Footer */}
-                <footer className="border-t border-slate-800 bg-slate-950/50 backdrop-blur-sm mt-auto">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4">
-                            {/* Creator Attribution */}
-                            <div className="flex items-center gap-2 text-xs sm:text-sm order-2 md:order-1">
-                                <span className="text-slate-500">Made with</span>
-                                <span className="text-red-500 animate-pulse">♥</span>
-                                <span className="text-slate-500">by</span>
-                                <span className="font-bold text-emerald-400">FELMON FEKADU</span>
-                            </div>
+                    {/* Footer */}
+                    <footer className="border-t border-slate-800 bg-slate-950/80 backdrop-blur-sm mt-8">
+                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+                            <div className="flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4">
+                                {/* Creator Attribution */}
+                                <div className="flex items-center gap-2 text-xs sm:text-sm order-2 md:order-1">
+                                    <span className="text-slate-500">Made with</span>
+                                    <span className="text-red-500 animate-pulse">♥</span>
+                                    <span className="text-slate-500">by</span>
+                                    <span className="font-bold text-emerald-400">FELMON FEKADU</span>
+                                </div>
 
-                            {/* Framework Attribution */}
-                            <div className="text-center text-xs sm:text-sm text-slate-500 order-1 md:order-2">
-                                <p>Based on the Paul-Elder Critical Thinking Framework</p>
-                                <p className="text-[10px] sm:text-xs mt-1">
-                                    Special thanks to <span className="text-emerald-400 font-medium">Dr. Richard Paul</span> & <span className="text-emerald-400 font-medium">Dr. Linda Elder</span>
-                                </p>
-                            </div>
+                                {/* Framework Attribution */}
+                                <div className="text-center text-xs sm:text-sm text-slate-500 order-1 md:order-2">
+                                    <p>Based on the Paul-Elder Critical Thinking Framework</p>
+                                    <p className="text-[10px] sm:text-xs mt-1">
+                                        Special thanks to <span className="text-emerald-400 font-medium">Dr. Richard Paul</span> & <span className="text-emerald-400 font-medium">Dr. Linda Elder</span>
+                                    </p>
+                                </div>
 
-                            {/* Year */}
-                            <div className="text-xs sm:text-sm text-slate-600 order-3">
-                                © {new Date().getFullYear()}
+                                {/* Year */}
+                                <div className="text-xs sm:text-sm text-slate-600 order-3">
+                                    © {new Date().getFullYear()}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </footer>
+                    </footer>
+                </div>
             </div>
         </div>
     );
