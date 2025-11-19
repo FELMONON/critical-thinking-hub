@@ -219,28 +219,28 @@ const ElementsOfThoughtView = ({ setActiveTab }) => {
                         <button
                             key={el.id}
                             onClick={() => setSelectedElement(el)}
-                            className={`p-4 rounded-xl border text-left transition-all duration-300 ${selectedElement?.id === el.id
+                            className={`p-3 sm:p-4 rounded-xl border text-left transition-all duration-300 active:scale-95 ${selectedElement?.id === el.id
                                 ? 'bg-emerald-600 border-emerald-500 text-white shadow-lg scale-105'
                                 : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-emerald-500/50 hover:bg-slate-700'
                                 }`}
                         >
-                            <span className="block font-bold text-sm mb-1">{el.title}</span>
-                            <span className="text-[10px] opacity-70 line-clamp-2">{el.desc}</span>
+                            <span className="block font-bold text-xs sm:text-sm mb-1">{el.title}</span>
+                            <span className="text-[11px] sm:text-xs opacity-70 line-clamp-2">{el.desc}</span>
                         </button>
                     ))}
                 </div>
 
                 {/* Detail Panel */}
-                <div className="bg-slate-900 rounded-xl border border-slate-800 p-6 flex flex-col h-full transition-all duration-300">
+                <div className="bg-slate-900 rounded-xl border border-slate-800 p-4 sm:p-6 flex flex-col h-full transition-all duration-300 min-h-[300px]">
                     {selectedElement ? (
                         <div className="animate-fadeIn">
-                            <h3 className="text-2xl font-bold text-emerald-400 mb-2">{selectedElement.title}</h3>
-                            <p className="text-slate-300 mb-6 text-sm italic">{selectedElement.desc}</p>
-                            <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+                            <h3 className="text-xl sm:text-2xl font-bold text-emerald-400 mb-2">{selectedElement.title}</h3>
+                            <p className="text-slate-300 mb-4 sm:mb-6 text-sm italic">{selectedElement.desc}</p>
+                            <div className="bg-slate-800/50 rounded-lg p-3 sm:p-4 border border-slate-700">
                                 <h4 className="text-xs font-bold text-slate-500 uppercase mb-3 tracking-wider">Key Questions (Page 6)</h4>
                                 <ul className="space-y-3">
                                     {selectedElement.questions.map((q, i) => (
-                                        <li key={i} className="flex items-start gap-3 text-slate-200 text-sm">
+                                        <li key={i} className="flex items-start gap-3 text-slate-200 text-xs sm:text-sm">
                                             <span className="text-emerald-500 mt-1 flex-shrink-0"><MessageCircle size={14} /></span>
                                             {q}
                                         </li>
@@ -249,20 +249,20 @@ const ElementsOfThoughtView = ({ setActiveTab }) => {
                             </div>
                         </div>
                     ) : (
-                        <div className="flex-1 flex flex-col items-center justify-center text-slate-600 text-center p-8">
-                            <Brain size={48} className="mb-4 opacity-20" />
-                            <p>Select an element to explore its definition and guiding questions.</p>
+                        <div className="flex-1 flex flex-col items-center justify-center text-slate-600 text-center p-4 sm:p-8">
+                            <Brain size={40} className="sm:w-12 sm:h-12 mb-3 sm:mb-4 opacity-20" />
+                            <p className="text-sm sm:text-base">Select an element to explore its definition and guiding questions.</p>
                         </div>
                     )}
                 </div>
             </div>
 
-            <div className="mt-8 flex justify-end">
+            <div className="mt-6 sm:mt-8 flex justify-center sm:justify-end">
                 <button
                     onClick={() => setActiveTab('standards')}
-                    className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 font-medium transition-colors"
+                    className="flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-2 bg-emerald-600/10 hover:bg-emerald-600/20 active:bg-emerald-600/30 rounded-lg sm:rounded-full text-emerald-400 hover:text-emerald-300 font-medium transition-all text-sm sm:text-base active:scale-95"
                 >
-                    Next: Intellectual Standards <ArrowRight size={18} />
+                    Next: Intellectual Standards <ArrowRight size={16} className="sm:w-[18px] sm:h-[18px]" />
                 </button>
             </div>
         </div>
@@ -285,25 +285,25 @@ const StandardsView = ({ setActiveTab }) => {
                     <div key={std.id} className="bg-slate-800 border border-slate-700 rounded-lg overflow-hidden transition-all duration-300">
                         <button
                             onClick={() => setActiveStandard(activeStandard === std.id ? null : std.id)}
-                            className="w-full flex items-center justify-between p-4 text-left hover:bg-slate-700/50 transition-colors"
+                            className="w-full flex items-center justify-between p-3 sm:p-4 text-left hover:bg-slate-700/50 active:bg-slate-700 transition-colors"
                         >
-                            <div className="flex items-center gap-4">
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${activeStandard === std.id ? 'bg-emerald-500 text-white' : 'bg-slate-700 text-slate-400'
+                            <div className="flex items-center gap-3 sm:gap-4">
+                                <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${activeStandard === std.id ? 'bg-emerald-500 text-white' : 'bg-slate-700 text-slate-400'
                                     }`}>
                                     {std.title[0]}
                                 </div>
-                                <span className={`font-medium ${activeStandard === std.id ? 'text-white' : 'text-slate-300'}`}>
+                                <span className={`font-medium text-sm sm:text-base ${activeStandard === std.id ? 'text-white' : 'text-slate-300'}`}>
                                     {std.title}
                                 </span>
                             </div>
-                            {activeStandard === std.id ? <ChevronUp size={20} className="text-slate-500" /> : <ChevronDown size={20} className="text-slate-500" />}
+                            {activeStandard === std.id ? <ChevronUp size={20} className="text-slate-500 flex-shrink-0" /> : <ChevronDown size={20} className="text-slate-500 flex-shrink-0" />}
                         </button>
                         {activeStandard === std.id && (
-                            <div className="p-4 pt-0 pl-16 border-t border-slate-700/50 bg-slate-800/50 animate-slideDown">
-                                <p className="text-slate-400 text-sm mb-4 mt-4">{std.desc}</p>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <div className="p-4 pt-0 pl-4 sm:pl-16 border-t border-slate-700/50 bg-slate-800/50 animate-slideDown">
+                                <p className="text-slate-400 text-xs sm:text-sm mb-4 mt-4">{std.desc}</p>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                     {std.questions.map((q, i) => (
-                                        <div key={i} className="bg-slate-900/50 p-3 rounded border border-slate-700/50 text-sm text-emerald-300">
+                                        <div key={i} className="bg-slate-900/50 p-2.5 sm:p-3 rounded border border-slate-700/50 text-xs sm:text-sm text-emerald-300">
                                             &quot;{q}&quot;
                                         </div>
                                     ))}
@@ -314,12 +314,12 @@ const StandardsView = ({ setActiveTab }) => {
                 ))}
             </div>
 
-            <div className="mt-8 flex justify-end">
+            <div className="mt-6 sm:mt-8 flex justify-center sm:justify-end">
                 <button
                     onClick={() => setActiveTab('traits')}
-                    className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 font-medium transition-colors"
+                    className="flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-2 bg-emerald-600/10 hover:bg-emerald-600/20 active:bg-emerald-600/30 rounded-lg sm:rounded-full text-emerald-400 hover:text-emerald-300 font-medium transition-all text-sm sm:text-base active:scale-95"
                 >
-                    Next: Intellectual Traits <ArrowRight size={18} />
+                    Next: Intellectual Traits <ArrowRight size={16} className="sm:w-[18px] sm:h-[18px]" />
                 </button>
             </div>
         </div>
@@ -336,14 +336,14 @@ const TraitsView = () => (
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             {intellectualTraits.map((item, idx) => (
-                <div key={idx} className="group relative bg-slate-800 rounded-xl border border-slate-700 p-6 hover:border-emerald-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-900/10">
-                    <div className="flex justify-between items-start mb-4">
-                        <h3 className="text-lg font-bold text-emerald-400">{item.trait}</h3>
-                        <span className="text-[10px] font-mono bg-slate-900 text-red-400 px-2 py-1 rounded border border-slate-700">
+                <div key={idx} className="group relative bg-slate-800 rounded-xl border border-slate-700 p-4 sm:p-6 hover:border-emerald-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-900/10">
+                    <div className="flex justify-between items-start gap-3 mb-3 sm:mb-4">
+                        <h3 className="text-base sm:text-lg font-bold text-emerald-400">{item.trait}</h3>
+                        <span className="text-[10px] sm:text-xs font-mono bg-slate-900 text-red-400 px-2 py-1 rounded border border-slate-700 whitespace-nowrap flex-shrink-0">
                             VS {item.opposite}
                         </span>
                     </div>
-                    <p className="text-slate-300 text-sm leading-relaxed">{item.desc}</p>
+                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
                 </div>
             ))}
         </div>
@@ -578,37 +578,37 @@ const DevelopmentView = () => {
             </div>
 
             <div className="space-y-4 relative">
-                <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-red-500 via-yellow-500 to-emerald-500"></div>
+                <div className="absolute left-3 sm:left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-red-500 via-yellow-500 to-emerald-500"></div>
                 {stages.map((stage, i) => (
-                    <div key={i} className="relative pl-12 group">
-                        <div className={`absolute left-[11px] top-4 w-3 h-3 rounded-full border-2 border-slate-900 transition-all duration-300 ${selectedStage === i ? 'bg-emerald-500 scale-150' : 'bg-slate-600 group-hover:bg-emerald-500'
+                    <div key={i} className="relative pl-10 sm:pl-12 group">
+                        <div className={`absolute left-[9px] sm:left-[11px] top-3 sm:top-4 w-3 h-3 rounded-full border-2 border-slate-900 transition-all duration-300 ${selectedStage === i ? 'bg-emerald-500 scale-150' : 'bg-slate-600 group-hover:bg-emerald-500'
                             }`}></div>
                         <button
                             onClick={() => setSelectedStage(selectedStage === i ? null : i)}
-                            className="w-full bg-slate-800 p-4 rounded-lg border border-slate-700 group-hover:border-emerald-500/50 transition-all text-left"
+                            className="w-full bg-slate-800 p-3 sm:p-4 rounded-lg border border-slate-700 group-hover:border-emerald-500/50 active:border-emerald-500/50 transition-all text-left active:bg-slate-700/50"
                         >
-                            <div className="flex justify-between items-start mb-2">
-                                <h3 className="text-lg font-bold text-white">{stage.title}</h3>
-                                <span className="text-xs text-slate-500 bg-slate-900 px-2 py-1 rounded">Stage {i + 1}/6</span>
+                            <div className="flex justify-between items-start gap-2 mb-2">
+                                <h3 className="text-base sm:text-lg font-bold text-white">{stage.title}</h3>
+                                <span className="text-[10px] sm:text-xs text-slate-500 bg-slate-900 px-2 py-1 rounded whitespace-nowrap flex-shrink-0">Stage {i + 1}/6</span>
                             </div>
-                            <p className="text-slate-400 text-sm mb-3">{stage.desc}</p>
+                            <p className="text-slate-400 text-xs sm:text-sm mb-3">{stage.desc}</p>
 
                             {selectedStage === i && (
-                                <div className="animate-fadeIn mt-4 pt-4 border-t border-slate-700 space-y-4">
+                                <div className="animate-fadeIn mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-slate-700 space-y-3 sm:space-y-4">
                                     <div>
-                                        <h4 className="text-sm font-bold text-emerald-400 uppercase tracking-wider mb-2">Signs You're Here</h4>
+                                        <h4 className="text-xs sm:text-sm font-bold text-emerald-400 uppercase tracking-wider mb-2">Signs You're Here</h4>
                                         <ul className="space-y-2">
                                             {stage.signs.map((sign, j) => (
-                                                <li key={j} className="text-sm text-slate-300 flex items-start gap-2">
-                                                    <span className="text-emerald-500 mt-1"><CheckCircle size={14} /></span>
+                                                <li key={j} className="text-xs sm:text-sm text-slate-300 flex items-start gap-2">
+                                                    <span className="text-emerald-500 mt-1 flex-shrink-0"><CheckCircle size={14} /></span>
                                                     {sign}
                                                 </li>
                                             ))}
                                         </ul>
                                     </div>
-                                    <div className="bg-blue-900/20 border border-blue-500/30 p-4 rounded-lg">
-                                        <h4 className="text-sm font-bold text-blue-400 uppercase tracking-wider mb-1">Next Goal</h4>
-                                        <p className="text-blue-200 text-sm">{stage.goal}</p>
+                                    <div className="bg-blue-900/20 border border-blue-500/30 p-3 sm:p-4 rounded-lg">
+                                        <h4 className="text-xs sm:text-sm font-bold text-blue-400 uppercase tracking-wider mb-1">Next Goal</h4>
+                                        <p className="text-blue-200 text-xs sm:text-sm">{stage.goal}</p>
                                     </div>
                                 </div>
                             )}
@@ -669,31 +669,31 @@ const BarriersView = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                 {/* Egocentric Thinking */}
                 <div>
-                    <div className="flex items-center gap-2 mb-4">
-                        <AlertTriangle className="text-yellow-500" />
-                        <h3 className="text-xl font-bold text-white">Egocentric Thinking</h3>
+                    <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                        <AlertTriangle className="text-yellow-500" size={20} />
+                        <h3 className="text-lg sm:text-xl font-bold text-white">Egocentric Thinking</h3>
                     </div>
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                         {egocentric.map((item, i) => (
                             <button
                                 key={i}
                                 onClick={() => setSelectedBarrier(selectedBarrier === `ego-${i}` ? null : `ego-${i}`)}
-                                className="w-full bg-slate-800 rounded-xl border border-slate-700 overflow-hidden hover:border-yellow-500/50 transition-all text-left"
+                                className="w-full bg-slate-800 rounded-xl border border-slate-700 overflow-hidden hover:border-yellow-500/50 active:border-yellow-500/50 transition-all text-left active:bg-slate-700/50"
                             >
-                                <div className="p-4">
-                                    <div className="text-emerald-300 font-medium mb-1">&quot;{item.label}&quot;</div>
-                                    <div className="text-slate-500 text-xs uppercase tracking-wide">{item.sub}</div>
+                                <div className="p-3 sm:p-4">
+                                    <div className="text-emerald-300 font-medium text-sm sm:text-base mb-1">&quot;{item.label}&quot;</div>
+                                    <div className="text-slate-500 text-[10px] sm:text-xs uppercase tracking-wide">{item.sub}</div>
                                 </div>
 
                                 {selectedBarrier === `ego-${i}` && (
-                                    <div className="bg-slate-900/50 p-4 border-t border-slate-700 space-y-3 animate-fadeIn">
+                                    <div className="bg-slate-900/50 p-3 sm:p-4 border-t border-slate-700 space-y-3 animate-fadeIn">
                                         <div>
-                                            <h4 className="text-xs font-bold text-yellow-400 uppercase tracking-wider mb-1">Example</h4>
-                                            <p className="text-sm text-slate-300">{item.example}</p>
+                                            <h4 className="text-[10px] sm:text-xs font-bold text-yellow-400 uppercase tracking-wider mb-1">Example</h4>
+                                            <p className="text-xs sm:text-sm text-slate-300">{item.example}</p>
                                         </div>
-                                        <div className="bg-emerald-900/20 border border-emerald-500/30 p-3 rounded-lg">
-                                            <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1">Antidote</h4>
-                                            <p className="text-sm text-emerald-200">{item.antidote}</p>
+                                        <div className="bg-emerald-900/20 border border-emerald-500/30 p-2.5 sm:p-3 rounded-lg">
+                                            <h4 className="text-[10px] sm:text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1">Antidote</h4>
+                                            <p className="text-xs sm:text-sm text-emerald-200">{item.antidote}</p>
                                         </div>
                                     </div>
                                 )}
@@ -704,12 +704,12 @@ const BarriersView = () => {
 
                 {/* Sociocentric Thinking */}
                 <div>
-                    <div className="flex items-center gap-2 mb-4">
-                        <AlertTriangle className="text-red-500" />
-                        <h3 className="text-xl font-bold text-white">Sociocentric Thinking</h3>
+                    <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                        <AlertTriangle className="text-red-500" size={20} />
+                        <h3 className="text-lg sm:text-xl font-bold text-white">Sociocentric Thinking</h3>
                     </div>
-                    <div className="bg-slate-800 rounded-xl border border-slate-700 p-6 text-sm text-slate-300 leading-relaxed h-full">
-                        <p className="mb-6 text-base font-medium text-white">The uncritical tendency to place one&apos;s culture, nation, or religion above all others.</p>
+                    <div className="bg-slate-800 rounded-xl border border-slate-700 p-4 sm:p-6 text-xs sm:text-sm text-slate-300 leading-relaxed h-full">
+                        <p className="mb-4 sm:mb-6 text-sm sm:text-base font-medium text-white">The uncritical tendency to place one&apos;s culture, nation, or religion above all others.</p>
 
                         <div className="space-y-4">
                             <div>
@@ -783,25 +783,25 @@ const ChecklistView = () => {
                 </div>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
                 {checklistItems.map((item) => (
                     <button
                         key={item.id}
                         onClick={() => toggleCheck(item.id)}
-                        className={`w-full flex items-center gap-4 p-4 rounded-lg border transition-all duration-200 text-left ${checks[item.id]
+                        className={`w-full flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg border transition-all duration-200 text-left active:scale-[0.99] ${checks[item.id]
                             ? 'bg-emerald-900/20 border-emerald-500/50'
-                            : 'bg-slate-800 border-slate-700 hover:border-slate-600'
+                            : 'bg-slate-800 border-slate-700 hover:border-slate-600 active:bg-slate-700'
                             }`}
                     >
-                        <div className={`w-6 h-6 rounded-full flex items-center justify-center border flex-shrink-0 transition-colors ${checks[item.id] ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-500 text-transparent'
+                        <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center border flex-shrink-0 transition-colors ${checks[item.id] ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-500 text-transparent'
                             }`}>
-                            <CheckCircle size={14} />
+                            <CheckCircle size={14} className="sm:w-4 sm:h-4" />
                         </div>
                         <div>
-                            <h3 className={`font-medium ${checks[item.id] ? 'text-emerald-300' : 'text-slate-200'}`}>
+                            <h3 className={`font-medium text-sm sm:text-base ${checks[item.id] ? 'text-emerald-300' : 'text-slate-200'}`}>
                                 {item.label}
                             </h3>
-                            <p className="text-xs text-slate-400 mt-1">{item.sub}</p>
+                            <p className="text-[11px] sm:text-xs text-slate-400 mt-1">{item.sub}</p>
                         </div>
                     </button>
                 ))}
