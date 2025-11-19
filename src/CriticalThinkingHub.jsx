@@ -189,10 +189,10 @@ const ElementsOfThoughtView = ({ setActiveTab }) => {
     const [selectedElement, setSelectedElement] = useState(null);
 
     return (
-        <div className="p-8 max-w-4xl mx-auto animate-fadeIn">
-            <div className="mb-8">
-                <h2 className="text-3xl font-bold text-white mb-4">The Elements of Thought</h2>
-                <p className="text-slate-400">
+        <div className="p-4 sm:p-6 md:p-8 max-w-4xl mx-auto animate-fadeIn">
+            <div className="mb-6 sm:mb-8">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">The Elements of Thought</h2>
+                <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
                     Whenever we think, we think for a <span className="text-emerald-400">purpose</span>, within a <span className="text-emerald-400">point of view</span>,
                     based on <span className="text-emerald-400">assumptions</span>, leading to <span className="text-emerald-400">implications</span> and <span className="text-emerald-400">consequences</span>.
                     We use <span className="text-emerald-400">data</span>, facts, and experiences to make <span className="text-emerald-400">inferences</span> based on <span className="text-emerald-400">concepts</span>
@@ -200,7 +200,7 @@ const ElementsOfThoughtView = ({ setActiveTab }) => {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 {/* Interactive Grid */}
                 <div className="grid grid-cols-2 gap-4">
                     {elementsOfThought.map((el) => (
@@ -261,10 +261,10 @@ const StandardsView = ({ setActiveTab }) => {
     const [activeStandard, setActiveStandard] = useState(null);
 
     return (
-        <div className="p-8 max-w-4xl mx-auto animate-fadeIn">
-            <div className="mb-8">
-                <h2 className="text-3xl font-bold text-white mb-4">Universal Intellectual Standards</h2>
-                <p className="text-slate-400">
+        <div className="p-4 sm:p-6 md:p-8 max-w-4xl mx-auto animate-fadeIn">
+            <div className="mb-6 sm:mb-8">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">Universal Intellectual Standards</h2>
+                <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
                     Standards which must be applied to thinking to ensure its quality. To be learned, they must be taught explicitly.
                 </p>
             </div>
@@ -315,14 +315,14 @@ const StandardsView = ({ setActiveTab }) => {
 };
 
 const TraitsView = () => (
-    <div className="p-8 max-w-5xl mx-auto animate-fadeIn">
-        <div className="mb-8">
-            <h2 className="text-3xl font-bold text-white mb-4">Intellectual Traits</h2>
-            <p className="text-slate-400">
+    <div className="p-4 sm:p-6 md:p-8 max-w-5xl mx-auto animate-fadeIn">
+        <div className="mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">Intellectual Traits</h2>
+            <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
                 Consistent application of intellectual standards to the elements of thought leads to the development of intellectual traits.
             </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             {intellectualTraits.map((item, idx) => (
                 <div key={idx} className="group relative bg-slate-800 rounded-xl border border-slate-700 p-6 hover:border-emerald-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-900/10">
                     <div className="flex justify-between items-start mb-4">
@@ -397,10 +397,10 @@ const QuestionTypesView = () => {
     ];
 
     return (
-        <div className="p-8 max-w-5xl mx-auto animate-fadeIn">
-            <div className="mb-8">
-                <h2 className="text-3xl font-bold text-white mb-4">Three Kinds of Questions</h2>
-                <p className="text-slate-400">
+        <div className="p-4 sm:p-6 md:p-8 max-w-5xl mx-auto animate-fadeIn">
+            <div className="mb-6 sm:mb-8">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">Three Kinds of Questions</h2>
+                <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
                     To approach a question effectively, figure out what type it is. (Page 16)
                 </p>
             </div>
@@ -480,12 +480,12 @@ const QuestionTypesView = () => {
                     </div>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     {questionTypes.map((type) => (
                         <button
                             key={type.id}
                             onClick={() => setSelectedType(type)}
-                            className={`bg-slate-800 p-6 rounded-xl border border-slate-700 flex flex-col items-center text-center hover:border-${type.color}-500/50 hover:bg-slate-800/80 transition-all group hover:-translate-y-1 duration-300`}
+                            className={`bg-slate-800 p-4 sm:p-6 rounded-xl border border-slate-700 flex flex-col items-center text-center hover:border-${type.color}-500/50 hover:bg-slate-800/80 transition-all group hover:-translate-y-1 duration-300 active:scale-95`}
                         >
                             <div className={`w-16 h-16 bg-${type.color}-500/10 text-${type.color}-400 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                                 <type.icon size={32} />
@@ -559,10 +559,10 @@ const DevelopmentView = () => {
     ];
 
     return (
-        <div className="p-8 max-w-4xl mx-auto animate-fadeIn">
-            <div className="mb-8">
-                <h2 className="text-3xl font-bold text-white mb-4">Stages of Critical Thinking Development</h2>
-                <p className="text-slate-400">Development is a process. Where are you on the journey? (Page 20)</p>
+        <div className="p-4 sm:p-6 md:p-8 max-w-4xl mx-auto animate-fadeIn">
+            <div className="mb-6 sm:mb-8">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">Stages of Critical Thinking Development</h2>
+                <p className="text-sm sm:text-base text-slate-400 leading-relaxed">Development is a process. Where are you on the journey? (Page 20)</p>
             </div>
 
             <div className="space-y-4 relative">
@@ -645,16 +645,16 @@ const BarriersView = () => {
     ];
 
     return (
-        <div className="p-8 max-w-6xl mx-auto animate-fadeIn">
-            <div className="mb-8">
-                <h2 className="text-3xl font-bold text-white mb-4">Barriers to Thinking</h2>
-                <p className="text-slate-400">
+        <div className="p-4 sm:p-6 md:p-8 max-w-6xl mx-auto animate-fadeIn">
+            <div className="mb-6 sm:mb-8">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">Barriers to Thinking</h2>
+                <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
                     Humans naturally use self-centered psychological standards to determine what to believe. Recognize these
                     patterns to overcome them. (Page 21)
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                 {/* Egocentric Thinking */}
                 <div>
                     <div className="flex items-center gap-2 mb-4">
@@ -759,14 +759,14 @@ const ChecklistView = () => {
     const progress = Math.round((Object.values(checks).filter(Boolean).length / checklistItems.length) * 100);
 
     return (
-        <div className="p-8 max-w-3xl mx-auto animate-fadeIn">
-            <div className="mb-8 flex items-end justify-between">
+        <div className="p-4 sm:p-6 md:p-8 max-w-3xl mx-auto animate-fadeIn">
+            <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
                 <div>
-                    <h2 className="text-3xl font-bold text-white mb-2">Reasoning Checklist</h2>
-                    <p className="text-slate-400">Based on Pages 4-5 of the Miniature Guide.</p>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">Reasoning Checklist</h2>
+                    <p className="text-sm sm:text-base text-slate-400">Based on Pages 4-5 of the Miniature Guide.</p>
                 </div>
-                <div className="text-right">
-                    <div className="text-3xl font-bold text-emerald-400">{progress}%</div>
+                <div className="text-left sm:text-right">
+                    <div className="text-2xl sm:text-3xl font-bold text-emerald-400">{progress}%</div>
                     <div className="text-xs text-slate-500 uppercase tracking-wider">Complete</div>
                 </div>
             </div>
@@ -933,24 +933,24 @@ const SolverView = () => {
     };
 
     return (
-        <div className="p-8 max-w-4xl mx-auto h-full flex flex-col animate-fadeIn">
-            <div className="bg-slate-800 rounded-2xl border border-slate-700 p-8 relative overflow-hidden shadow-2xl flex flex-col h-full max-h-[800px]">
+        <div className="p-4 sm:p-6 md:p-8 max-w-4xl mx-auto h-full flex flex-col animate-fadeIn">
+            <div className="bg-slate-800 rounded-xl sm:rounded-2xl border border-slate-700 p-4 sm:p-6 md:p-8 relative overflow-hidden shadow-2xl flex flex-col h-full max-h-[800px]">
                 <div className="absolute top-0 left-0 w-full h-1 bg-slate-700">
                     <div className="h-full bg-emerald-500 transition-all duration-500" style={{ width: `${((step + 1) / steps.length) * 100}%` }}></div>
                 </div>
 
-                <div className="mb-6 flex-shrink-0">
-                    <div className="flex justify-between items-start mb-2">
-                        <h4 className="text-emerald-400 font-mono text-xs uppercase tracking-widest">Problem Solving Template • Step {step + 1} of {steps.length}</h4>
+                <div className="mb-4 sm:mb-6 flex-shrink-0">
+                    <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-2">
+                        <h4 className="text-emerald-400 font-mono text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest">Problem Solving • Step {step + 1}/{steps.length}</h4>
                         <button
                             onClick={() => setShowExample(!showExample)}
                             className="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition-colors"
                         >
-                            <HelpCircle size={12} /> {showExample ? 'Hide Example' : 'Show Example'}
+                            <HelpCircle size={12} /> {showExample ? 'Hide' : 'Show'} Example
                         </button>
                     </div>
-                    <h2 className="text-3xl font-bold text-white mb-4">{steps[step].title}</h2>
-                    <p className="text-slate-300 text-lg leading-relaxed">{steps[step].text}</p>
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4">{steps[step].title}</h2>
+                    <p className="text-sm sm:text-base text-slate-300 leading-relaxed">{steps[step].text}</p>
 
                     {showExample && (
                         <div className="mt-4 bg-blue-900/20 border border-blue-500/30 p-4 rounded-lg text-blue-200 text-sm animate-fadeIn">
@@ -981,22 +981,20 @@ const SolverView = () => {
                     )}
                 </div>
 
-                <div className="flex justify-between items-center pt-6 border-t border-slate-700 flex-shrink-0">
-                    <div className="flex gap-2">
-                        <button
-                            onClick={() => setStep(Math.max(0, step - 1))}
-                            disabled={step === 0}
-                            className="text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed px-4 py-2 transition-colors"
-                        >
-                            Previous
-                        </button>
-                    </div>
+                <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-4 sm:pt-6 border-t border-slate-700 flex-shrink-0">
+                    <button
+                        onClick={() => setStep(Math.max(0, step - 1))}
+                        disabled={step === 0}
+                        className="text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed px-4 py-2 transition-colors text-sm"
+                    >
+                        Previous
+                    </button>
 
-                    <div className="flex gap-3">
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                         <button
                             onClick={analyzeWithAI}
                             disabled={analyzing || !inputs[steps[step].id]?.trim()}
-                            className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg font-medium text-sm flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                            className="bg-slate-700 hover:bg-slate-600 active:bg-slate-500 text-white px-4 py-2.5 rounded-lg font-medium text-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                         >
                             {analyzing ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />}
                             Get Feedback
@@ -1004,10 +1002,10 @@ const SolverView = () => {
                         <button
                             onClick={() => setStep(Math.min(steps.length - 1, step + 1))}
                             disabled={step === steps.length - 1 || !inputs[steps[step].id]?.trim()}
-                            className="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                            className="bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-400 text-white px-6 py-2.5 rounded-lg font-medium flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                         >
                             Next Step
-                            <ArrowRight size={18} />
+                            <ArrowRight size={16} />
                         </button>
                     </div>
                 </div>
@@ -1103,23 +1101,23 @@ const AITutorView = ({ context = "General" }) => {
     };
 
     return (
-        <div className="p-6 max-w-4xl mx-auto h-full flex flex-col">
-            <div className="mb-4 flex justify-between items-center">
+        <div className="p-4 sm:p-6 max-w-4xl mx-auto h-full flex flex-col">
+            <div className="mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                 <div>
-                    <h2 className="text-3xl font-bold text-white flex items-center gap-2">
-                        <Sparkles className="text-emerald-400" /> Socratic AI Tutor
+                    <h2 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
+                        <Sparkles className="text-emerald-400" size={24} /> Socratic AI Tutor
                     </h2>
-                    <p className="text-slate-400 text-sm">Context: <span className="text-emerald-400 font-semibold">{context}</span></p>
+                    <p className="text-slate-400 text-xs sm:text-sm">Context: <span className="text-emerald-400 font-semibold">{context}</span></p>
                 </div>
                 <button onClick={() => setMessages([{ role: 'system', text: '...' }, { role: 'assistant', text: 'Chat cleared.' }])} className="text-xs flex items-center gap-1 text-slate-500 hover:text-red-400 transition-colors">
                     <Trash2 size={14} /> Clear History
                 </button>
             </div>
-            <div className="flex-1 bg-slate-900 rounded-xl border border-slate-800 p-4 overflow-hidden flex flex-col shadow-inner relative">
-                <div className="flex-1 overflow-y-auto space-y-6 pr-2 chat-scroll">
+            <div className="flex-1 bg-slate-900 rounded-xl border border-slate-800 p-3 sm:p-4 overflow-hidden flex flex-col shadow-inner relative min-h-0">
+                <div className="flex-1 overflow-y-auto space-y-4 sm:space-y-6 pr-2 chat-scroll">
                     {messages.slice(1).map((msg, idx) => (
                         <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                            <div className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed shadow-md ${msg.role === 'user' ? 'bg-slate-700 text-slate-100 rounded-br-none' : 'bg-emerald-900/20 border border-emerald-500/30 text-emerald-100 rounded-bl-none'
+                            <div className={`max-w-[90%] sm:max-w-[85%] p-3 sm:p-4 rounded-2xl text-xs sm:text-sm leading-relaxed shadow-md ${msg.role === 'user' ? 'bg-slate-700 text-slate-100 rounded-br-none' : 'bg-emerald-900/20 border border-emerald-500/30 text-emerald-100 rounded-bl-none'
                                 }`}>
                                 {msg.role === 'assistant' && (
                                     <div className="flex items-center gap-2 mb-2 text-emerald-500 text-xs font-bold uppercase tracking-wider border-b border-emerald-500/20 pb-1">
@@ -1142,10 +1140,10 @@ const AITutorView = ({ context = "General" }) => {
                     )}
                     <div ref={chatEndRef} />
                 </div>
-                <div className="mt-4 relative">
-                    <input type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSend()} placeholder="Ask a question or state a problem..." className="w-full bg-slate-950 border border-slate-700 rounded-xl pl-4 pr-12 py-4 text-white focus:outline-none focus:border-emerald-500 transition-all shadow-lg" disabled={loading} />
-                    <button onClick={handleSend} disabled={loading || !input.trim()} className="absolute right-2 top-2 bottom-2 bg-emerald-600 hover:bg-emerald-500 text-white w-10 rounded-lg flex items-center justify-center transition-all">
-                        <Send size={18} />
+                <div className="mt-3 sm:mt-4 relative">
+                    <input type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSend()} placeholder="Ask a question or state a problem..." className="w-full bg-slate-950 border border-slate-700 rounded-xl pl-3 sm:pl-4 pr-12 sm:pr-14 py-3 sm:py-4 text-sm sm:text-base text-white placeholder:text-slate-600 focus:outline-none focus:border-emerald-500 transition-all shadow-lg" disabled={loading} />
+                    <button onClick={handleSend} disabled={loading || !input.trim()} className="absolute right-2 top-2 bottom-2 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-400 text-white w-9 sm:w-10 rounded-lg flex items-center justify-center transition-all disabled:opacity-50">
+                        <Send size={16} className="sm:w-[18px] sm:h-[18px]" />
                     </button>
                 </div>
             </div>
@@ -1155,9 +1153,12 @@ const AITutorView = ({ context = "General" }) => {
 
 // --- Navigation Component ---
 
-const NavButton = ({ id, label, icon: Icon, activeTab, setActiveTab }) => (
+const NavButton = ({ id, label, icon: Icon, activeTab, setActiveTab, onClick }) => (
     <button
-        onClick={() => setActiveTab(id)}
+        onClick={() => {
+            setActiveTab(id);
+            if (onClick) onClick();
+        }}
         className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-left ${activeTab === id
             ? 'bg-emerald-600/20 text-emerald-400 border border-emerald-600/50'
             : 'hover:bg-slate-800 hover:text-white'
@@ -1174,14 +1175,15 @@ const Navigation = ({ activeTab, setActiveTab }) => {
     return (
         <>
             {/* Mobile Header */}
-            <div className="md:hidden fixed top-0 left-0 right-0 bg-slate-900 border-b border-slate-800 z-50 px-4 py-3 flex items-center justify-between">
+            <div className="md:hidden fixed top-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 z-50 px-4 py-3 flex items-center justify-between shadow-lg">
                 <div className="flex items-center gap-2">
                     <Brain size={20} className="text-emerald-400" />
-                    <h1 className="text-lg font-bold text-emerald-400">Critical Hub</h1>
+                    <h1 className="text-base sm:text-lg font-bold text-emerald-400">Critical Hub</h1>
                 </div>
                 <button
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    className="text-slate-300 hover:text-white p-2"
+                    className="text-slate-300 hover:text-white active:text-emerald-400 p-2 rounded-lg hover:bg-slate-800 active:bg-slate-700 transition-all"
+                    aria-label="Toggle menu"
                 >
                     {mobileMenuOpen ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
                 </button>
@@ -1197,20 +1199,20 @@ const Navigation = ({ activeTab, setActiveTab }) => {
 
             {/* Sidebar Navigation */}
             <div className={`
-                fixed md:relative
-                w-64 bg-slate-900 text-slate-300 h-screen flex flex-col flex-shrink-0 border-r border-slate-800
-                transition-transform duration-300 z-40
+                fixed md:relative top-0 left-0
+                w-72 sm:w-80 md:w-64 bg-slate-900 text-slate-300 h-screen flex flex-col flex-shrink-0 border-r border-slate-800
+                transition-transform duration-300 ease-out z-40
                 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
                 md:translate-x-0
             `}>
-                <div className="p-6 border-b border-slate-800">
+                <div className="p-4 sm:p-6 border-b border-slate-800">
                     <h1 className="text-xl font-bold text-emerald-400 flex items-center gap-2">
                         <Brain size={24} />
                         Critical Hub
                     </h1>
                     <p className="text-xs text-slate-500 mt-1">Paul-Elder Framework</p>
                 </div>
-                <nav className="flex-1 overflow-y-auto p-4 space-y-6">
+                <nav className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-6 overscroll-contain">
                     <div>
                         <button
                             onClick={() => { setActiveTab('home'); setMobileMenuOpen(false); }}
@@ -1222,20 +1224,26 @@ const Navigation = ({ activeTab, setActiveTab }) => {
                     </div>
                     <div>
                         <h3 className="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Foundations</h3>
-                        <NavButton id="elements" label="Elements of Thought" icon={Grid} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
-                        <NavButton id="standards" label="Intellectual Standards" icon={CheckCircle} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
-                        <NavButton id="traits" label="Intellectual Traits" icon={Shield} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
+                        <div className="space-y-1">
+                            <NavButton id="elements" label="Elements of Thought" icon={Grid} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
+                            <NavButton id="standards" label="Intellectual Standards" icon={CheckCircle} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
+                            <NavButton id="traits" label="Intellectual Traits" icon={Shield} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
+                        </div>
                     </div>
                     <div>
                         <h3 className="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Tools & Analysis</h3>
-                        <NavButton id="questions" label="Three Question Types" icon={HelpCircle} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
-                        <NavButton id="checklist" label="Reasoning Checklist" icon={MessageCircle} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
-                        <NavButton id="solver" label="Problem Solver" icon={Zap} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
+                        <div className="space-y-1">
+                            <NavButton id="questions" label="Three Question Types" icon={HelpCircle} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
+                            <NavButton id="checklist" label="Reasoning Checklist" icon={MessageCircle} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
+                            <NavButton id="solver" label="Problem Solver" icon={Zap} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
+                        </div>
                     </div>
                     <div>
                         <h3 className="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Development</h3>
-                        <NavButton id="development" label="Stages & Barriers" icon={Layers} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
-                        <NavButton id="barriers" label="Barriers to Thinking" icon={AlertTriangle} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
+                        <div className="space-y-1">
+                            <NavButton id="development" label="Stages & Barriers" icon={Layers} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
+                            <NavButton id="barriers" label="Barriers to Thinking" icon={AlertTriangle} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
+                        </div>
                     </div>
                     <div>
                         <NavButton id="ai-tutor" label="Socratic AI Tutor" icon={Sparkles} activeTab={activeTab} setActiveTab={setActiveTab} onClick={() => setMobileMenuOpen(false)} />
@@ -1271,17 +1279,17 @@ export default function CriticalThinkingHub() {
         <div className="flex h-screen bg-slate-950 text-slate-200 font-sans overflow-hidden">
             <style>{customStyles}</style>
             <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
-            <div className="flex-1 overflow-auto bg-gradient-to-br from-slate-950 to-slate-900 relative flex flex-col pt-16 md:pt-0">
-                <div className="flex-1">
+            <div className="flex-1 overflow-auto bg-gradient-to-br from-slate-950 to-slate-900 relative flex flex-col pt-16 md:pt-0 overscroll-contain">
+                <div className="flex-1 min-h-0">
                     {renderContent()}
                 </div>
 
                 {/* Footer */}
-                <footer className="border-t border-slate-800 bg-slate-950/50 backdrop-blur-sm">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                <footer className="border-t border-slate-800 bg-slate-950/50 backdrop-blur-sm mt-auto">
+                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4">
                             {/* Creator Attribution */}
-                            <div className="flex items-center gap-2 text-sm">
+                            <div className="flex items-center gap-2 text-xs sm:text-sm order-2 md:order-1">
                                 <span className="text-slate-500">Made with</span>
                                 <span className="text-red-500 animate-pulse">♥</span>
                                 <span className="text-slate-500">by</span>
@@ -1289,15 +1297,15 @@ export default function CriticalThinkingHub() {
                             </div>
 
                             {/* Framework Attribution */}
-                            <div className="text-center text-sm text-slate-500">
+                            <div className="text-center text-xs sm:text-sm text-slate-500 order-1 md:order-2">
                                 <p>Based on the Paul-Elder Critical Thinking Framework</p>
-                                <p className="text-xs mt-1">
+                                <p className="text-[10px] sm:text-xs mt-1">
                                     Special thanks to <span className="text-emerald-400 font-medium">Dr. Richard Paul</span> & <span className="text-emerald-400 font-medium">Dr. Linda Elder</span>
                                 </p>
                             </div>
 
                             {/* Year */}
-                            <div className="text-sm text-slate-600">
+                            <div className="text-xs sm:text-sm text-slate-600 order-3">
                                 © {new Date().getFullYear()}
                             </div>
                         </div>
