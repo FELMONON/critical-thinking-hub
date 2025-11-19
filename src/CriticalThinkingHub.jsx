@@ -75,56 +75,56 @@ const HomeView = ({ setActiveTab }) => (
             <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
         </div>
 
-        <div className="relative p-8 max-w-6xl mx-auto animate-fadeIn">
+        <div className="relative px-4 sm:px-6 lg:px-8 py-8 md:py-12 max-w-6xl mx-auto animate-fadeIn">
             {/* Hero Section */}
-            <div className="text-center mb-20 mt-12">
-                <div className="inline-block mb-6">
-                    <div className="flex items-center justify-center gap-3 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 rounded-full px-6 py-2">
-                        <Brain className="text-emerald-400" size={20} />
-                        <span className="text-sm font-medium text-emerald-400">Paul-Elder Framework</span>
+            <div className="text-center mb-12 md:mb-20 mt-4 md:mt-12">
+                <div className="inline-block mb-4 md:mb-6">
+                    <div className="flex items-center justify-center gap-2 md:gap-3 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 rounded-full px-4 md:px-6 py-1.5 md:py-2">
+                        <Brain className="text-emerald-400" size={18} />
+                        <span className="text-xs md:text-sm font-medium text-emerald-400">Paul-Elder Framework</span>
                     </div>
                 </div>
 
-                <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-emerald-200 to-emerald-400 bg-clip-text text-transparent leading-tight">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-white via-emerald-200 to-emerald-400 bg-clip-text text-transparent leading-tight px-4">
                     Master Your
                     <br />
                     <span className="bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">Thinking</span>
                 </h1>
 
-                <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed mb-8">
+                <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed mb-6 md:mb-8 px-4">
                     Welcome to your personal Critical Thinking Hub. This tool is designed to help you internalize the <span className="text-emerald-400 font-medium">Paul-Elder framework</span>—the gold standard for reasoning.
                 </p>
 
-                <div className="flex items-center justify-center gap-6 text-sm text-slate-500">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-slate-500">
                     <div className="flex items-center gap-2">
-                        <CheckCircle size={16} className="text-emerald-500" />
+                        <CheckCircle size={14} className="text-emerald-500 flex-shrink-0" />
                         <span>Interactive Learning</span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <CheckCircle size={16} className="text-emerald-500" />
+                        <CheckCircle size={14} className="text-emerald-500 flex-shrink-0" />
                         <span>AI-Powered Feedback</span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <CheckCircle size={16} className="text-emerald-500" />
+                        <CheckCircle size={14} className="text-emerald-500 flex-shrink-0" />
                         <span>Practical Tools</span>
                     </div>
                 </div>
             </div>
 
             {/* Action Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 <button
                     onClick={() => setActiveTab('elements')}
-                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700/50 hover:border-emerald-500/50 transition-all text-left hover:-translate-y-2 hover:shadow-2xl hover:shadow-emerald-500/10 overflow-hidden"
+                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/50 active:border-emerald-500/50 md:hover:border-emerald-500/50 transition-all text-left active:scale-95 md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:shadow-emerald-500/10 overflow-hidden"
                 >
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/0 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/0 to-emerald-500/5 opacity-0 group-active:opacity-100 md:group-hover:opacity-100 transition-opacity"></div>
                     <div className="relative">
-                        <div className="w-16 h-16 bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 text-emerald-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-emerald-500/20">
-                            <Grid size={32} />
+                        <div className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 text-emerald-400 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-active:scale-110 md:group-hover:scale-110 md:group-hover:rotate-3 transition-all shadow-lg shadow-emerald-500/20">
+                            <Grid size={28} className="md:w-8 md:h-8" />
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-3">Learn the Basics</h3>
+                        <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3">Learn the Basics</h3>
                         <p className="text-slate-400 text-sm leading-relaxed">Explore the 8 Elements of Thought and Universal Standards.</p>
-                        <div className="mt-4 flex items-center text-emerald-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="mt-3 md:mt-4 flex items-center text-emerald-400 text-sm font-medium md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                             Start Learning <ArrowRight size={16} className="ml-2" />
                         </div>
                     </div>
@@ -132,16 +132,16 @@ const HomeView = ({ setActiveTab }) => (
 
                 <button
                     onClick={() => setActiveTab('solver')}
-                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700/50 hover:border-blue-500/50 transition-all text-left hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/10 overflow-hidden"
+                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/50 active:border-blue-500/50 md:hover:border-blue-500/50 transition-all text-left active:scale-95 md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:shadow-blue-500/10 overflow-hidden"
                 >
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-blue-500/5 opacity-0 group-active:opacity-100 md:group-hover:opacity-100 transition-opacity"></div>
                     <div className="relative">
-                        <div className="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-blue-500/5 text-blue-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-blue-500/20">
-                            <Zap size={32} />
+                        <div className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-blue-500/20 to-blue-500/5 text-blue-400 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-active:scale-110 md:group-hover:scale-110 md:group-hover:rotate-3 transition-all shadow-lg shadow-blue-500/20">
+                            <Zap size={28} className="md:w-8 md:h-8" />
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-3">Solve a Problem</h3>
+                        <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3">Solve a Problem</h3>
                         <p className="text-slate-400 text-sm leading-relaxed">Use the interactive template to tackle a specific issue step-by-step.</p>
-                        <div className="mt-4 flex items-center text-blue-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="mt-3 md:mt-4 flex items-center text-blue-400 text-sm font-medium md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                             Start Solving <ArrowRight size={16} className="ml-2" />
                         </div>
                     </div>
@@ -149,16 +149,16 @@ const HomeView = ({ setActiveTab }) => (
 
                 <button
                     onClick={() => setActiveTab('checklist')}
-                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700/50 hover:border-purple-500/50 transition-all text-left hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-500/10 overflow-hidden"
+                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/50 active:border-purple-500/50 md:hover:border-purple-500/50 transition-all text-left active:scale-95 md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:shadow-purple-500/10 overflow-hidden"
                 >
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-purple-500/5 opacity-0 group-active:opacity-100 md:group-hover:opacity-100 transition-opacity"></div>
                     <div className="relative">
-                        <div className="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-purple-500/5 text-purple-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-purple-500/20">
-                            <MessageCircle size={32} />
+                        <div className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-purple-500/20 to-purple-500/5 text-purple-400 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-active:scale-110 md:group-hover:scale-110 md:group-hover:rotate-3 transition-all shadow-lg shadow-purple-500/20">
+                            <MessageCircle size={28} className="md:w-8 md:h-8" />
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-3">Check Reasoning</h3>
+                        <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3">Check Reasoning</h3>
                         <p className="text-slate-400 text-sm leading-relaxed">Verify your logic with the comprehensive reasoning checklist.</p>
-                        <div className="mt-4 flex items-center text-purple-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="mt-3 md:mt-4 flex items-center text-purple-400 text-sm font-medium md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                             Start Checking <ArrowRight size={16} className="ml-2" />
                         </div>
                     </div>
@@ -166,16 +166,16 @@ const HomeView = ({ setActiveTab }) => (
 
                 <button
                     onClick={() => setActiveTab('ai-tutor')}
-                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700/50 hover:border-orange-500/50 transition-all text-left hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10 overflow-hidden"
+                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/50 active:border-orange-500/50 md:hover:border-orange-500/50 transition-all text-left active:scale-95 md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:shadow-orange-500/10 overflow-hidden"
                 >
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-orange-500/5 opacity-0 group-active:opacity-100 md:group-hover:opacity-100 transition-opacity"></div>
                     <div className="relative">
-                        <div className="w-16 h-16 bg-gradient-to-br from-orange-500/20 to-orange-500/5 text-orange-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all shadow-lg shadow-orange-500/20">
-                            <Sparkles size={32} />
+                        <div className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-orange-500/20 to-orange-500/5 text-orange-400 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-active:scale-110 md:group-hover:scale-110 md:group-hover:rotate-3 transition-all shadow-lg shadow-orange-500/20">
+                            <Sparkles size={28} className="md:w-8 md:h-8" />
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-3">Ask the Tutor</h3>
+                        <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3">Ask the Tutor</h3>
                         <p className="text-slate-400 text-sm leading-relaxed">Get Socratic guidance from the AI on any topic.</p>
-                        <div className="mt-4 flex items-center text-orange-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="mt-3 md:mt-4 flex items-center text-orange-400 text-sm font-medium md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                             Start Chatting <ArrowRight size={16} className="ml-2" />
                         </div>
                     </div>
