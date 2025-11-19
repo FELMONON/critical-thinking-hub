@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { CheckCircle, Brain, MessageCircle, Shield, Zap, ArrowRight, ArrowLeft, ChevronDown, ChevronUp, Grid, Sparkles, Send, Trash2, Loader2, Layers, AlertTriangle, HelpCircle, Scale, User, Home } from 'lucide-react';
+import { CheckCircle, Brain, MessageCircle, Shield, Zap, ArrowRight, ArrowLeft, ChevronDown, ChevronUp, Grid, Sparkles, Send, Trash2, Loader2, Layers, AlertTriangle, HelpCircle, Scale, User, Home, BookOpen, ExternalLink } from 'lucide-react';
 
 // --- STYLES ---
 const customStyles = `
@@ -121,6 +121,47 @@ const HomeView = ({ setActiveTab }) => (
                         <span>Practical Tools</span>
                     </div>
                 </div>
+            </div>
+
+            {/* Book Reference Section */}
+            <div className="mb-12 md:mb-16 max-w-4xl mx-auto">
+                <a
+                    href="https://drive.google.com/file/d/1yotkd4mw5Ppi4NW8zw70Ld1LvdmYhB4C/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-slate-700/50 active:border-emerald-500/50 md:hover:border-emerald-500/50 transition-all active:scale-[0.98] md:hover:scale-[1.02] md:hover:shadow-2xl md:hover:shadow-emerald-500/20 overflow-hidden"
+                >
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/0 to-emerald-500/10 opacity-0 group-active:opacity-100 md:group-hover:opacity-100 transition-opacity"></div>
+
+                    <div className="relative flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
+                        <div className="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 text-emerald-400 rounded-2xl flex items-center justify-center group-active:scale-110 md:group-hover:scale-110 md:group-hover:rotate-6 transition-all shadow-lg shadow-emerald-500/20">
+                            <BookOpen size={28} className="md:w-8 md:h-8" />
+                        </div>
+
+                        <div className="flex-1 min-w-0">
+                            <div className="flex items-start justify-between gap-3 mb-2">
+                                <h3 className="text-lg md:text-xl font-bold text-white">Based on the Official Guide</h3>
+                                <ExternalLink size={18} className="text-emerald-400 flex-shrink-0 opacity-70 group-active:opacity-100 md:group-hover:opacity-100 transition-opacity" />
+                            </div>
+                            <p className="text-slate-300 font-medium text-sm md:text-base mb-2">
+                                The Miniature Guide to Critical Thinking: Concepts and Tools
+                            </p>
+                            <p className="text-slate-400 text-xs md:text-sm leading-relaxed mb-3">
+                                By Dr. Richard Paul and Dr. Linda Elder • Foundation for Critical Thinking
+                            </p>
+                            <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg px-3 py-1.5 text-xs md:text-sm text-emerald-400 font-medium">
+                                <BookOpen size={14} />
+                                <span>Read the Complete Guide (PDF)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="relative mt-4 pt-4 border-t border-slate-700/50">
+                        <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
+                            <span className="text-emerald-400 font-medium">This website brings the book to life.</span> Explore interactive tools, practice with AI guidance, and master the critical thinking framework described in the guide.
+                        </p>
+                    </div>
+                </a>
             </div>
 
             {/* Action Cards */}
