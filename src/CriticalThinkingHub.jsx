@@ -391,6 +391,31 @@ const TraitsView = () => (
     </div>
 );
 
+// Color class mapping for dynamic Tailwind classes (ensures they're bundled)
+const colorClasses = {
+    blue: {
+        border: 'border-blue-500/30',
+        bg: 'bg-blue-500/10',
+        text: 'text-blue-400',
+        textLight: 'text-blue-500',
+        hoverBorder: 'hover:border-blue-500/50'
+    },
+    orange: {
+        border: 'border-orange-500/30',
+        bg: 'bg-orange-500/10',
+        text: 'text-orange-400',
+        textLight: 'text-orange-500',
+        hoverBorder: 'hover:border-orange-500/50'
+    },
+    purple: {
+        border: 'border-purple-500/30',
+        bg: 'bg-purple-500/10',
+        text: 'text-purple-400',
+        textLight: 'text-purple-500',
+        hoverBorder: 'hover:border-purple-500/50'
+    }
+};
+
 const QuestionTypesView = () => {
     const [selectedType, setSelectedType] = useState(null);
 
@@ -449,6 +474,8 @@ const QuestionTypesView = () => {
         }
     ];
 
+    const getColorClass = (color, type) => colorClasses[color]?.[type] || '';
+
     return (
         <div className="p-4 sm:p-6 md:p-8 max-w-5xl mx-auto animate-fadeIn">
             <div className="mb-6 sm:mb-8">
@@ -467,14 +494,14 @@ const QuestionTypesView = () => {
                         <ArrowLeft size={18} /> Back to Overview
                     </button>
 
-                    <div className={`bg-slate-800 rounded-xl border border-${selectedType.color}-500/30 p-8 shadow-2xl`}>
+                    <div className={`bg-slate-800 rounded-xl border ${getColorClass(selectedType.color, 'border')} p-8 shadow-2xl`}>
                         <div className="flex items-start gap-6 mb-8">
-                            <div className={`p-4 rounded-full bg-${selectedType.color}-500/10 text-${selectedType.color}-400`}>
+                            <div className={`p-4 rounded-full ${getColorClass(selectedType.color, 'bg')} ${getColorClass(selectedType.color, 'text')}`}>
                                 <selectedType.icon size={40} />
                             </div>
                             <div>
                                 <h3 className="text-3xl font-bold text-white mb-2">{selectedType.title}</h3>
-                                <div className={`text-${selectedType.color}-400 font-medium text-lg`}>{selectedType.subtitle}</div>
+                                <div className={`${getColorClass(selectedType.color, 'text')} font-medium text-lg`}>{selectedType.subtitle}</div>
                             </div>
                         </div>
 
@@ -506,7 +533,7 @@ const QuestionTypesView = () => {
                                     <ul className="space-y-3">
                                         {selectedType.examples.map((ex, i) => (
                                             <li key={i} className="flex items-start gap-3 text-slate-300">
-                                                <span className={`text-${selectedType.color}-500 mt-1`}><HelpCircle size={16} /></span>
+                                                <span className={`${getColorClass(selectedType.color, 'textLight')} mt-1`}><HelpCircle size={16} /></span>
                                                 {ex}
                                             </li>
                                         ))}
@@ -538,13 +565,13 @@ const QuestionTypesView = () => {
                         <button
                             key={type.id}
                             onClick={() => setSelectedType(type)}
-                            className={`bg-slate-800 p-4 sm:p-6 rounded-xl border border-slate-700 flex flex-col items-center text-center hover:border-${type.color}-500/50 hover:bg-slate-800/80 transition-all group hover:-translate-y-1 duration-300 active:scale-95`}
+                            className={`bg-slate-800 p-4 sm:p-6 rounded-xl border border-slate-700 flex flex-col items-center text-center ${getColorClass(type.color, 'hoverBorder')} hover:bg-slate-800/80 transition-all group hover:-translate-y-1 duration-300 active:scale-95`}
                         >
-                            <div className={`w-16 h-16 bg-${type.color}-500/10 text-${type.color}-400 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                            <div className={`w-16 h-16 ${getColorClass(type.color, 'bg')} ${getColorClass(type.color, 'text')} rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                                 <type.icon size={32} />
                             </div>
                             <h3 className="text-xl font-bold text-white mb-1">{type.title}</h3>
-                            <div className={`text-${type.color}-400 text-sm font-medium mb-4`}>{type.subtitle}</div>
+                            <div className={`${getColorClass(type.color, 'text')} text-sm font-medium mb-4`}>{type.subtitle}</div>
                             <p className="text-slate-400 text-sm mb-6 min-h-[40px] line-clamp-2">{type.nature}</p>
 
                             <div className="w-full mt-auto space-y-3">
@@ -637,7 +664,7 @@ const DevelopmentView = () => {
                             {selectedStage === i && (
                                 <div className="animate-fadeIn mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-slate-700 space-y-3 sm:space-y-4">
                                     <div>
-                                        <h4 className="text-xs sm:text-sm font-bold text-emerald-400 uppercase tracking-wider mb-2">Signs You're Here</h4>
+                                        <h4 className="text-xs sm:text-sm font-bold text-emerald-400 uppercase tracking-wider mb-2">Signs You&apos;re Here</h4>
                                         <ul className="space-y-2">
                                             {stage.signs.map((sign, j) => (
                                                 <li key={j} className="text-xs sm:text-sm text-slate-300 flex items-start gap-2">
@@ -781,7 +808,7 @@ const BarriersView = () => {
 
                             <div className="bg-emerald-900/20 border border-emerald-500/30 p-4 rounded-lg mt-4">
                                 <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">How to Overcome</h4>
-                                <p className="text-emerald-200 text-sm">Actively seek out and empathetically consider perspectives from outside your "in-group." Question traditions and group beliefs with the same rigor you apply to outsiders.</p>
+                                <p className="text-emerald-200 text-sm">Actively seek out and empathetically consider perspectives from outside your &ldquo;in-group.&rdquo; Question traditions and group beliefs with the same rigor you apply to outsiders.</p>
                             </div>
                         </div>
                     </div>
@@ -867,6 +894,7 @@ const SolverView = () => {
     const [aiFeedback, setAiFeedback] = useState({});
     const [analyzing, setAnalyzing] = useState(false);
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    const hasApiKey = Boolean(apiKey && apiKey.trim());
 
     const steps = [
         {
@@ -949,6 +977,11 @@ const SolverView = () => {
         const currentInput = inputs[steps[step].id];
         if (!currentInput || !currentInput.trim()) return;
 
+        if (!hasApiKey) {
+            setAiFeedback({ ...aiFeedback, [steps[step].id]: "API key not configured. Please add VITE_GEMINI_API_KEY to your .env file to enable AI feedback." });
+            return;
+        }
+
         setAnalyzing(true);
 
         const systemPrompt = `
@@ -969,17 +1002,20 @@ const SolverView = () => {
         };
 
         try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
             const data = await response.json();
+            if (data.error) {
+                throw new Error(data.error.message || 'API error');
+            }
             const feedback = data.candidates?.[0]?.content?.parts?.[0]?.text || "I couldn't analyze that right now.";
             setAiFeedback({ ...aiFeedback, [steps[step].id]: feedback.replace(/\*/g, '') });
         } catch (error) {
             console.error(error);
-            setAiFeedback({ ...aiFeedback, [steps[step].id]: "Connection error. Please try again." });
+            setAiFeedback({ ...aiFeedback, [steps[step].id]: error.message || "Connection error. Please try again." });
         } finally {
             setAnalyzing(false);
         }
@@ -994,7 +1030,12 @@ const SolverView = () => {
 
                 <div className="mb-4 sm:mb-6 flex-shrink-0">
                     <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-2">
-                        <h4 className="text-emerald-400 font-mono text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest">Problem Solving • Step {step + 1}/{steps.length}</h4>
+                        <div className="flex items-center gap-3">
+                            <h4 className="text-emerald-400 font-mono text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest">Problem Solving • Step {step + 1}/{steps.length}</h4>
+                            <span className="text-xs text-slate-500">
+                                ({Object.values(inputs).filter(v => v?.trim()).length}/{steps.length} completed)
+                            </span>
+                        </div>
                         <button
                             onClick={() => setShowExample(!showExample)}
                             className="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition-colors"
@@ -1015,12 +1056,19 @@ const SolverView = () => {
 
                 <div className="flex-1 flex flex-col min-h-0 mb-6 gap-4">
                     <div className="flex-1 flex flex-col">
-                        <label className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-2 block">Your Input</label>
+                        <div className="flex items-center justify-between mb-2">
+                            <label className="text-sm font-bold text-slate-500 uppercase tracking-wider">Your Input</label>
+                            {inputs[steps[step].id]?.trim() && (
+                                <span className="text-xs text-emerald-500 flex items-center gap-1">
+                                    <CheckCircle size={12} /> Saved
+                                </span>
+                            )}
+                        </div>
                         <textarea
                             value={inputs[steps[step].id] || ''}
                             onChange={handleInput}
                             placeholder={steps[step].prompt}
-                            className="w-full flex-1 bg-slate-900/50 border border-slate-700 rounded-xl p-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-emerald-500 transition-all resize-none"
+                            className={`w-full flex-1 bg-slate-900/50 border rounded-xl p-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-emerald-500 transition-all resize-none ${inputs[steps[step].id]?.trim() ? 'border-emerald-500/30' : 'border-slate-700'}`}
                         />
                     </div>
 
@@ -1046,11 +1094,12 @@ const SolverView = () => {
                     <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                         <button
                             onClick={analyzeWithAI}
-                            disabled={analyzing || !inputs[steps[step].id]?.trim()}
+                            disabled={analyzing || !inputs[steps[step].id]?.trim() || !hasApiKey}
                             className="bg-slate-700 hover:bg-slate-600 active:bg-slate-500 text-white px-4 py-2.5 rounded-lg font-medium text-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                            title={!hasApiKey ? "API key required for AI feedback" : ""}
                         >
                             {analyzing ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />}
-                            Get Feedback
+                            {analyzing ? 'Analyzing...' : 'Get Feedback'}
                         </button>
                         <button
                             onClick={() => setStep(Math.min(steps.length - 1, step + 1))}
@@ -1069,24 +1118,33 @@ const SolverView = () => {
 
 // --- AITutor View (Enhanced) ---
 const AITutorView = ({ context = "General" }) => {
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    const hasApiKey = Boolean(apiKey && apiKey.trim());
+
     const [messages, setMessages] = useState([
         { role: 'system', text: 'I am your Socratic Critical Thinking Tutor...' },
-        { role: 'assistant', text: 'Hello. I am your Critical Thinking Assistant, guided by the concepts of Paul and Elder. How can I help you analyze a problem, article, or idea today?' }
+        { role: 'assistant', text: hasApiKey
+            ? 'Hello. I am your Critical Thinking Assistant, guided by the concepts of Paul and Elder. How can I help you analyze a problem, article, or idea today?'
+            : 'Welcome! To enable AI conversations, please add VITE_GEMINI_API_KEY to your .env file. You can get a free API key from Google AI Studio.' }
     ]);
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
     const [analysis, setAnalysis] = useState(null);
     const chatEndRef = useRef(null);
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
     useEffect(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages, loading]);
 
     const callGemini = async (userText) => {
+        if (!hasApiKey) {
+            setMessages(prev => [...prev, { role: 'assistant', text: "API key not configured. Please add VITE_GEMINI_API_KEY to your .env file to enable AI conversations." }]);
+            return;
+        }
+
         setLoading(true);
         setAnalysis("Consulting the Miniature Guide...");
-        await new Promise(r => setTimeout(r, 800));
+        await new Promise(r => setTimeout(r, 500));
 
         const history = messages.filter(m => m.role !== 'system').map(m => ({
             role: m.role === 'assistant' ? 'model' : 'user',
@@ -1128,17 +1186,20 @@ const AITutorView = ({ context = "General" }) => {
         };
 
         try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
             const data = await response.json();
+            if (data.error) {
+                throw new Error(data.error.message || 'API error');
+            }
             const botResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm having trouble accessing my logic centers.";
             setMessages(prev => [...prev, { role: 'assistant', text: botResponse.replace(/\*/g, '') }]);
         } catch (error) {
             console.error(error);
-            setMessages(prev => [...prev, { role: 'assistant', text: "Connection error." }]);
+            setMessages(prev => [...prev, { role: 'assistant', text: error.message || "Connection error. Please try again." }]);
         } finally {
             setLoading(false);
             setAnalysis(null);
@@ -1245,8 +1306,9 @@ const Navigation = ({ activeTab, setActiveTab }) => {
             {/* Mobile Menu Overlay */}
             {mobileMenuOpen && (
                 <div
-                    className="md:hidden fixed inset-0 bg-black/50 z-40 animate-fadeIn"
+                    className="md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40 animate-fadeIn"
                     onClick={() => setMobileMenuOpen(false)}
+                    aria-hidden="true"
                 />
             )}
 
@@ -1254,18 +1316,28 @@ const Navigation = ({ activeTab, setActiveTab }) => {
             <div className={`
                 fixed md:relative top-0 md:top-auto left-0
                 w-72 sm:w-80 md:w-64 bg-slate-900 text-slate-300 h-screen flex flex-col flex-shrink-0 border-r border-slate-800
-                transition-transform duration-300 ease-out z-40
+                transition-transform duration-300 ease-out z-50 shadow-2xl md:shadow-none
                 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
                 md:translate-x-0
             `}>
-                <div className="p-4 sm:p-6 border-b border-slate-800 flex-shrink-0">
-                    <h1 className="text-xl font-bold text-emerald-400 flex items-center gap-2">
-                        <Brain size={24} />
-                        Critical Hub
-                    </h1>
-                    <p className="text-xs text-slate-500 mt-1">Paul-Elder Framework</p>
+                <div className="p-4 sm:p-6 border-b border-slate-800 flex-shrink-0 flex items-center justify-between">
+                    <div>
+                        <h1 className="text-xl font-bold text-emerald-400 flex items-center gap-2">
+                            <Brain size={24} />
+                            Critical Hub
+                        </h1>
+                        <p className="text-xs text-slate-500 mt-1">Paul-Elder Framework</p>
+                    </div>
+                    {/* Close button for mobile */}
+                    <button
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="md:hidden text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800 transition-colors"
+                        aria-label="Close menu"
+                    >
+                        <ChevronUp size={20} className="rotate-[-90deg]" />
+                    </button>
                 </div>
-                <nav className="flex-1 overflow-y-auto p-4 space-y-6">
+                <nav className="flex-1 overflow-y-auto p-4 space-y-6 nav-scroll overscroll-contain">
                     <div>
                         <button
                             onClick={() => { setActiveTab('home'); setMobileMenuOpen(false); }}
@@ -1325,7 +1397,7 @@ export default function CriticalThinkingHub() {
             case 'questions': return <QuestionTypesView />;
             case 'development': return <DevelopmentView />;
             case 'barriers': return <BarriersView />;
-            case 'ai-tutor': return <AITutorView context={activeTab === 'ai-tutor' ? 'General Thinking' : activeTab} />;
+            case 'ai-tutor': return <AITutorView context="General Thinking" />;
             default: return <ElementsOfThoughtView />;
         }
     };
