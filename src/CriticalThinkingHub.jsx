@@ -126,6 +126,99 @@ const customStyles = `
         top: 0;
     }
 
+    /* Confetti celebration animation */
+    .confetti-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+        overflow: hidden;
+    }
+
+    .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        animation: confettiFall 3s ease-out forwards;
+    }
+
+    @keyframes confettiFall {
+        0% {
+            transform: translateY(-100px) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh) rotate(720deg);
+            opacity: 0;
+        }
+    }
+
+    /* Success checkmark animation */
+    .success-checkmark {
+        animation: successPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes successPop {
+        0% { transform: scale(0); opacity: 0; }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Progress ring animation */
+    .progress-ring-circle {
+        transition: stroke-dashoffset 0.5s ease-out;
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+    }
+
+    /* Shimmer loading effect */
+    .shimmer {
+        background: linear-gradient(
+            90deg,
+            rgba(255,255,255,0) 0%,
+            rgba(255,255,255,0.1) 50%,
+            rgba(255,255,255,0) 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+
+    /* Toast slide in */
+    .toast-slide-in {
+        animation: toastSlideIn 0.3s ease-out forwards;
+    }
+
+    @keyframes toastSlideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+
+    .toast-slide-out {
+        animation: toastSlideOut 0.3s ease-in forwards;
+    }
+
+    @keyframes toastSlideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+
+    /* Hover lift effect */
+    .hover-lift {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hover-lift:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
     /* Reduced motion preference */
     @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
@@ -135,6 +228,145 @@ const customStyles = `
         }
     }
 `;
+
+// --- CONFETTI COMPONENT ---
+const Confetti = ({ show }) => {
+    if (!show) return null;
+
+    const colors = ['#10b981', '#3b82f6', '#8b5cf6', '#f59e0b', '#ef4444', '#ec4899'];
+    const confettiPieces = Array.from({ length: 50 }, (_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        delay: Math.random() * 0.5,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        size: Math.random() * 8 + 6,
+        duration: Math.random() * 1 + 2
+    }));
+
+    return (
+        <div className="confetti-container" aria-hidden="true">
+            {confettiPieces.map((piece) => (
+                <div
+                    key={piece.id}
+                    className="confetti"
+                    style={{
+                        left: `${piece.left}%`,
+                        width: `${piece.size}px`,
+                        height: `${piece.size}px`,
+                        backgroundColor: piece.color,
+                        borderRadius: Math.random() > 0.5 ? '50%' : '2px',
+                        animationDelay: `${piece.delay}s`,
+                        animationDuration: `${piece.duration}s`
+                    }}
+                />
+            ))}
+        </div>
+    );
+};
+
+// --- PROGRESS RING COMPONENT ---
+const ProgressRing = ({ progress, size = 80, strokeWidth = 6 }) => {
+    const radius = (size - strokeWidth) / 2;
+    const circumference = radius * 2 * Math.PI;
+    const offset = circumference - (progress / 100) * circumference;
+
+    return (
+        <div className="relative inline-flex items-center justify-center">
+            <svg width={size} height={size} className="transform -rotate-90">
+                {/* Background circle */}
+                <circle
+                    cx={size / 2}
+                    cy={size / 2}
+                    r={radius}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={strokeWidth}
+                    className="text-slate-700"
+                />
+                {/* Progress circle */}
+                <circle
+                    cx={size / 2}
+                    cy={size / 2}
+                    r={radius}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={strokeWidth}
+                    strokeLinecap="round"
+                    className={`text-emerald-500 transition-all duration-500 ease-out ${progress === 100 ? 'text-emerald-400' : ''}`}
+                    style={{
+                        strokeDasharray: circumference,
+                        strokeDashoffset: offset
+                    }}
+                />
+            </svg>
+            <div className="absolute inset-0 flex items-center justify-center">
+                {progress === 100 ? (
+                    <CheckCircle className="text-emerald-400 success-checkmark" size={size * 0.4} />
+                ) : (
+                    <span className="text-xl font-bold text-white">{progress}%</span>
+                )}
+            </div>
+        </div>
+    );
+};
+
+// --- TOAST NOTIFICATION COMPONENT ---
+// eslint-disable-next-line no-unused-vars
+const Toast = ({ message, type = 'success', onClose }) => {
+    useEffect(() => {
+        const timer = setTimeout(onClose, 4000);
+        return () => clearTimeout(timer);
+    }, [onClose]);
+
+    const types = {
+        success: { bg: 'bg-emerald-600', icon: CheckCircle },
+        error: { bg: 'bg-red-600', icon: AlertTriangle },
+        info: { bg: 'bg-blue-600', icon: HelpCircle }
+    };
+
+    const { bg, icon: Icon } = types[type];
+
+    return (
+        <div className={`${bg} text-white px-4 py-3 rounded-lg shadow-xl toast-slide-in flex items-center gap-3 min-w-[280px]`}>
+            <Icon size={20} />
+            <span className="font-medium">{message}</span>
+            <button onClick={onClose} className="ml-auto opacity-70 hover:opacity-100 transition-opacity">
+                <ChevronUp size={16} className="rotate-45" />
+            </button>
+        </div>
+    );
+};
+
+// --- SKELETON LOADING COMPONENT ---
+// eslint-disable-next-line no-unused-vars
+const Skeleton = ({ className = '', variant = 'text' }) => {
+    const variants = {
+        text: 'h-4 rounded',
+        title: 'h-6 rounded',
+        avatar: 'w-10 h-10 rounded-full',
+        card: 'h-32 rounded-xl',
+        button: 'h-10 w-24 rounded-lg'
+    };
+
+    return (
+        <div
+            className={`bg-slate-700/50 shimmer ${variants[variant]} ${className}`}
+            aria-hidden="true"
+        />
+    );
+};
+
+// --- TYPING INDICATOR COMPONENT ---
+const TypingIndicator = ({ message }) => (
+    <div className="flex items-center gap-3 text-slate-400">
+        <div className="flex gap-1">
+            <span className="w-2 h-2 bg-emerald-500 rounded-full typing-dot"></span>
+            <span className="w-2 h-2 bg-emerald-500 rounded-full typing-dot"></span>
+            <span className="w-2 h-2 bg-emerald-500 rounded-full typing-dot"></span>
+        </div>
+        <span className="text-sm">{message}</span>
+    </div>
+);
 
 // --- DATA & CONTENT (Paul-Elder Model) ---
 
@@ -940,9 +1172,23 @@ const BarriersView = () => {
 
 const ChecklistView = () => {
     const [checks, setChecks] = useState({});
+    const [showConfetti, setShowConfetti] = useState(false);
+    const [hasCompletedOnce, setHasCompletedOnce] = useState(false);
 
     const toggleCheck = (id) => {
-        setChecks(prev => ({ ...prev, [id]: !prev[id] }));
+        setChecks(prev => {
+            const newChecks = { ...prev, [id]: !prev[id] };
+            const completedCount = Object.values(newChecks).filter(Boolean).length;
+
+            // Trigger confetti when reaching 100% for the first time
+            if (completedCount === checklistItems.length && !hasCompletedOnce) {
+                setShowConfetti(true);
+                setHasCompletedOnce(true);
+                setTimeout(() => setShowConfetti(false), 3000);
+            }
+
+            return newChecks;
+        });
     };
 
     const checklistItems = [
@@ -957,48 +1203,78 @@ const ChecklistView = () => {
     ];
 
     const progress = Math.round((Object.values(checks).filter(Boolean).length / checklistItems.length) * 100);
+    const isComplete = progress === 100;
 
     return (
         <div className="p-4 sm:p-6 md:p-8 max-w-3xl mx-auto animate-fadeIn">
-            <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+            <Confetti show={showConfetti} />
+
+            <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                     <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">Reasoning Checklist</h2>
                     <p className="text-sm sm:text-base text-slate-400">Based on Pages 4-5 of the Miniature Guide.</p>
                 </div>
-                <div className="text-left sm:text-right">
-                    <div className="text-2xl sm:text-3xl font-bold text-emerald-400">{progress}%</div>
-                    <div className="text-xs text-slate-500 uppercase tracking-wider">Complete</div>
+                <div className="flex items-center gap-4">
+                    <ProgressRing progress={progress} size={70} strokeWidth={5} />
                 </div>
             </div>
 
-            <div className="space-y-2 sm:space-y-3">
-                {checklistItems.map((item) => (
+            {/* Success message when complete */}
+            {isComplete && (
+                <div className="mb-6 bg-emerald-900/30 border border-emerald-500/50 rounded-xl p-4 animate-scaleIn">
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                            <Sparkles className="text-emerald-400" size={20} />
+                        </div>
+                        <div>
+                            <h4 className="font-semibold text-emerald-300">Excellent Critical Thinking!</h4>
+                            <p className="text-sm text-emerald-400/80">You&apos;ve addressed all 8 elements of reasoning.</p>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            <div className="space-y-2 sm:space-y-3 stagger-children">
+                {checklistItems.map((item, index) => (
                     <button
                         key={item.id}
                         onClick={() => toggleCheck(item.id)}
-                        className={`w-full flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg border transition-all duration-200 text-left active:scale-[0.99] ${checks[item.id]
-                            ? 'bg-emerald-900/20 border-emerald-500/50'
-                            : 'bg-slate-800 border-slate-700 hover:border-slate-600 active:bg-slate-700'
+                        className={`w-full flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg border transition-all duration-200 text-left active:scale-[0.99] focus-ring ${checks[item.id]
+                            ? 'bg-emerald-900/20 border-emerald-500/50 hover:bg-emerald-900/30'
+                            : 'bg-slate-800 border-slate-700 hover:border-slate-600 hover:bg-slate-800/80 active:bg-slate-700'
                             }`}
+                        style={{ animationDelay: `${index * 0.05}s` }}
+                        aria-pressed={checks[item.id]}
                     >
-                        <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center border flex-shrink-0 transition-colors ${checks[item.id] ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-500 text-transparent'
+                        <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center border flex-shrink-0 transition-all duration-300 ${checks[item.id]
+                            ? 'bg-emerald-500 border-emerald-500 text-white scale-110'
+                            : 'border-slate-500 text-transparent hover:border-slate-400'
                             }`}>
-                            <CheckCircle size={14} className="sm:w-4 sm:h-4" />
+                            <CheckCircle size={14} className={`sm:w-4 sm:h-4 transition-transform ${checks[item.id] ? 'scale-100' : 'scale-0'}`} />
                         </div>
-                        <div>
-                            <h3 className={`font-medium text-sm sm:text-base ${checks[item.id] ? 'text-emerald-300' : 'text-slate-200'}`}>
+                        <div className="flex-1">
+                            <h3 className={`font-medium text-sm sm:text-base transition-colors ${checks[item.id] ? 'text-emerald-300' : 'text-slate-200'}`}>
                                 {item.label}
                             </h3>
                             <p className="text-[11px] sm:text-xs text-slate-400 mt-1">{item.sub}</p>
                         </div>
+                        {checks[item.id] && (
+                            <span className="text-emerald-500 text-xs font-medium hidden sm:block">Done</span>
+                        )}
                     </button>
                 ))}
             </div>
 
-            <div className="mt-8 flex justify-end">
+            <div className="mt-8 flex items-center justify-between">
+                <span className="text-sm text-slate-500">
+                    {Object.values(checks).filter(Boolean).length} of {checklistItems.length} completed
+                </span>
                 <button
-                    onClick={() => setChecks({})}
-                    className="text-sm text-slate-500 hover:text-white underline underline-offset-4 transition-colors"
+                    onClick={() => {
+                        setChecks({});
+                        setHasCompletedOnce(false);
+                    }}
+                    className="text-sm text-slate-500 hover:text-white underline underline-offset-4 transition-colors focus-ring rounded"
                 >
                     Reset Checklist
                 </button>
@@ -1364,11 +1640,8 @@ const AITutorView = ({ context = "General" }) => {
                     ))}
                     {loading && (
                         <div className="flex justify-start w-full">
-                            <div className="bg-slate-800 p-4 rounded-2xl rounded-bl-none border border-slate-700 flex flex-col gap-3 min-w-[200px] animate-pulse">
-                                <div className="flex items-center gap-2 text-emerald-400 text-xs font-mono">
-                                    <Loader2 size={14} className="animate-spin" />
-                                    {analysis || "Thinking..."}
-                                </div>
+                            <div className="bg-slate-800 p-4 rounded-2xl rounded-bl-none border border-slate-700 min-w-[200px]">
+                                <TypingIndicator message={analysis || "Thinking..."} />
                             </div>
                         </div>
                     )}
