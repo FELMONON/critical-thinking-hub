@@ -7,7 +7,7 @@ const customStyles = `
     .chat-scroll::-webkit-scrollbar { width: 6px; }
     .chat-scroll::-webkit-scrollbar-track { background: transparent; }
     .chat-scroll::-webkit-scrollbar-thumb { background-color: #475569; border-radius: 20px; }
-    
+
     /* Scrollbar for navigation */
     .nav-scroll::-webkit-scrollbar { width: 4px; }
     .nav-scroll::-webkit-scrollbar-track { background: transparent; }
@@ -15,11 +15,13 @@ const customStyles = `
     .nav-scroll::-webkit-scrollbar-thumb:hover { background-color: #475569; }
 
     /* Smooth scrolling */
-    .nav-scroll {
+    .nav-scroll, .chat-scroll {
         scrollbar-width: thin;
         scrollbar-color: #334155 transparent;
+        scroll-behavior: smooth;
     }
 
+    /* Typing animation dots */
     .typing-dot {
         animation: typing 1.4s infinite ease-in-out both;
     }
@@ -31,17 +33,124 @@ const customStyles = `
         40% { transform: scale(1); }
     }
 
+    /* Fade in animation */
     .animate-fadeIn {
-        animation: fadeIn 0.5s ease-out;
+        animation: fadeIn 0.4s ease-out forwards;
     }
 
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
+        from { opacity: 0; transform: translateY(8px); }
         to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide up animation */
+    .animate-slideUp {
+        animation: slideUp 0.3s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide down for expandable content */
+    .animate-slideDown {
+        animation: slideDown 0.25s ease-out forwards;
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; max-height: 0; }
+        to { opacity: 1; max-height: 500px; }
+    }
+
+    /* Scale in animation */
+    .animate-scaleIn {
+        animation: scaleIn 0.2s ease-out forwards;
+    }
+
+    @keyframes scaleIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Staggered children animation */
+    .stagger-children > * {
+        opacity: 0;
+        animation: fadeIn 0.4s ease-out forwards;
+    }
+    .stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+    .stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+    .stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+    .stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+    .stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+    .stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+    .stagger-children > *:nth-child(7) { animation-delay: 0.35s; }
+    .stagger-children > *:nth-child(8) { animation-delay: 0.4s; }
+
+    /* Pulse glow effect for active elements */
+    .pulse-glow {
+        animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+        50% { box-shadow: 0 0 20px 4px rgba(16, 185, 129, 0.2); }
+    }
+
+    /* Smooth button press */
+    .btn-press {
+        transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+    }
+    .btn-press:active {
+        transform: scale(0.97);
+    }
+
+    /* Focus visible for accessibility */
+    .focus-ring:focus-visible {
+        outline: 2px solid #10b981;
+        outline-offset: 2px;
+    }
+
+    /* Skip to content link for accessibility */
+    .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #10b981;
+        color: white;
+        padding: 8px 16px;
+        z-index: 100;
+        transition: top 0.2s;
+    }
+    .skip-link:focus {
+        top: 0;
+    }
+
+    /* Reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
     }
 `;
 
 // --- DATA & CONTENT (Paul-Elder Model) ---
+
+// Contextual loading messages for AI interactions
+const loadingMessages = [
+    "Consulting the Miniature Guide...",
+    "Examining your reasoning...",
+    "Considering multiple perspectives...",
+    "Applying intellectual standards...",
+    "Analyzing your thinking...",
+    "Reflecting on the elements of thought...",
+    "Evaluating your assumptions...",
+    "Thinking critically about this..."
+];
+
+const getRandomLoadingMessage = () => loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
 
 const elementsOfThought = [
     { id: 'purpose', title: 'Purpose', desc: 'Goals, objectives, function', questions: ['What is my central aim?', 'What am I trying to accomplish?', 'Is my purpose justifiable?'] },
@@ -165,10 +274,11 @@ const HomeView = ({ setActiveTab }) => (
             </div>
 
             {/* Action Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 stagger-children" role="group" aria-label="Quick actions">
                 <button
                     onClick={() => setActiveTab('elements')}
-                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/50 active:border-emerald-500/50 md:hover:border-emerald-500/50 transition-all text-left active:scale-95 md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:shadow-emerald-500/10 overflow-hidden"
+                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/50 active:border-emerald-500/50 md:hover:border-emerald-500/50 transition-all text-left active:scale-[0.98] md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:shadow-emerald-500/10 overflow-hidden focus-ring"
+                    aria-label="Learn the Basics - Explore Elements of Thought"
                 >
                     <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/0 to-emerald-500/5 opacity-0 group-active:opacity-100 md:group-hover:opacity-100 transition-opacity"></div>
                     <div className="relative">
@@ -185,7 +295,8 @@ const HomeView = ({ setActiveTab }) => (
 
                 <button
                     onClick={() => setActiveTab('solver')}
-                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/50 active:border-blue-500/50 md:hover:border-blue-500/50 transition-all text-left active:scale-95 md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:shadow-blue-500/10 overflow-hidden"
+                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/50 active:border-blue-500/50 md:hover:border-blue-500/50 transition-all text-left active:scale-[0.98] md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:shadow-blue-500/10 overflow-hidden focus-ring"
+                    aria-label="Solve a Problem - Use interactive problem-solving template"
                 >
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-blue-500/5 opacity-0 group-active:opacity-100 md:group-hover:opacity-100 transition-opacity"></div>
                     <div className="relative">
@@ -202,7 +313,8 @@ const HomeView = ({ setActiveTab }) => (
 
                 <button
                     onClick={() => setActiveTab('checklist')}
-                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/50 active:border-purple-500/50 md:hover:border-purple-500/50 transition-all text-left active:scale-95 md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:shadow-purple-500/10 overflow-hidden"
+                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/50 active:border-purple-500/50 md:hover:border-purple-500/50 transition-all text-left active:scale-[0.98] md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:shadow-purple-500/10 overflow-hidden focus-ring"
+                    aria-label="Check Reasoning - Verify logic with reasoning checklist"
                 >
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-purple-500/5 opacity-0 group-active:opacity-100 md:group-hover:opacity-100 transition-opacity"></div>
                     <div className="relative">
@@ -219,7 +331,8 @@ const HomeView = ({ setActiveTab }) => (
 
                 <button
                     onClick={() => setActiveTab('ai-tutor')}
-                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/50 active:border-orange-500/50 md:hover:border-orange-500/50 transition-all text-left active:scale-95 md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:shadow-orange-500/10 overflow-hidden"
+                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700/50 active:border-orange-500/50 md:hover:border-orange-500/50 transition-all text-left active:scale-[0.98] md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:shadow-orange-500/10 overflow-hidden focus-ring"
+                    aria-label="Ask the AI Tutor - Get Socratic guidance"
                 >
                     <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-orange-500/5 opacity-0 group-active:opacity-100 md:group-hover:opacity-100 transition-opacity"></div>
                     <div className="relative">
@@ -290,9 +403,16 @@ const ElementsOfThoughtView = ({ setActiveTab }) => {
                             </div>
                         </div>
                     ) : (
-                        <div className="flex-1 flex flex-col items-center justify-center text-slate-600 text-center p-4 sm:p-8">
-                            <Brain size={40} className="sm:w-12 sm:h-12 mb-3 sm:mb-4 opacity-20" />
-                            <p className="text-sm sm:text-base">Select an element to explore its definition and guiding questions.</p>
+                        <div className="flex-1 flex flex-col items-center justify-center text-center p-4 sm:p-8 animate-fadeIn">
+                            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-slate-800/50 rounded-2xl flex items-center justify-center mb-4 sm:mb-5">
+                                <Brain size={32} className="sm:w-10 sm:h-10 text-slate-600" />
+                            </div>
+                            <h4 className="text-slate-400 font-medium mb-2">Explore the Elements</h4>
+                            <p className="text-sm text-slate-500 max-w-[200px]">Select an element from the grid to discover its definition and guiding questions.</p>
+                            <div className="mt-4 flex items-center gap-1 text-emerald-500/60 text-xs">
+                                <ArrowLeft size={14} />
+                                <span>Click any element to begin</span>
+                            </div>
                         </div>
                     )}
                 </div>
@@ -1143,8 +1263,8 @@ const AITutorView = ({ context = "General" }) => {
         }
 
         setLoading(true);
-        setAnalysis("Consulting the Miniature Guide...");
-        await new Promise(r => setTimeout(r, 500));
+        setAnalysis(getRandomLoadingMessage());
+        await new Promise(r => setTimeout(r, 400));
 
         const history = messages.filter(m => m.role !== 'system').map(m => ({
             role: m.role === 'assistant' ? 'model' : 'user',
@@ -1273,12 +1393,13 @@ const NavButton = ({ id, label, icon: Icon, activeTab, setActiveTab, onClick }) 
             setActiveTab(id);
             if (onClick) onClick();
         }}
-        className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-left ${activeTab === id
+        className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-lg transition-all duration-200 text-left focus-ring min-h-[48px] ${activeTab === id
             ? 'bg-emerald-600/20 text-emerald-400 border border-emerald-600/50'
-            : 'hover:bg-slate-800 hover:text-white'
+            : 'hover:bg-slate-800 hover:text-white active:bg-slate-700'
             }`}
+        aria-current={activeTab === id ? 'page' : undefined}
     >
-        <Icon size={18} />
+        <Icon size={18} className="flex-shrink-0" />
         <span className="text-sm font-medium">{label}</span>
     </button>
 );
@@ -1296,8 +1417,10 @@ const Navigation = ({ activeTab, setActiveTab }) => {
                 </div>
                 <button
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    className="text-slate-300 hover:text-white active:text-emerald-400 p-2 rounded-lg hover:bg-slate-800 active:bg-slate-700 transition-all"
-                    aria-label="Toggle menu"
+                    className="text-slate-300 hover:text-white active:text-emerald-400 p-2 rounded-lg hover:bg-slate-800 active:bg-slate-700 transition-all focus-ring"
+                    aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                    aria-expanded={mobileMenuOpen}
+                    aria-controls="mobile-navigation"
                 >
                     {mobileMenuOpen ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
                 </button>
@@ -1313,13 +1436,18 @@ const Navigation = ({ activeTab, setActiveTab }) => {
             )}
 
             {/* Sidebar Navigation */}
-            <div className={`
-                fixed md:relative top-0 md:top-auto left-0
-                w-72 sm:w-80 md:w-64 bg-slate-900 text-slate-300 h-screen flex flex-col flex-shrink-0 border-r border-slate-800
-                transition-transform duration-300 ease-out z-50 shadow-2xl md:shadow-none
-                ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
-                md:translate-x-0
-            `}>
+            <aside
+                id="mobile-navigation"
+                role="navigation"
+                aria-label="Main navigation"
+                className={`
+                    fixed md:relative top-0 md:top-auto left-0
+                    w-72 sm:w-80 md:w-64 bg-slate-900 text-slate-300 h-screen flex flex-col flex-shrink-0 border-r border-slate-800
+                    transition-transform duration-300 ease-out z-50 shadow-2xl md:shadow-none
+                    ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+                    md:translate-x-0
+                `}
+            >
                 <div className="p-4 sm:p-6 border-b border-slate-800 flex-shrink-0 flex items-center justify-between">
                     <div>
                         <h1 className="text-xl font-bold text-emerald-400 flex items-center gap-2">
@@ -1376,7 +1504,7 @@ const Navigation = ({ activeTab, setActiveTab }) => {
                     {/* Bottom padding for mobile */}
                     <div className="h-20 md:h-4"></div>
                 </nav>
-            </div>
+            </aside>
         </>
     );
 };
@@ -1405,10 +1533,19 @@ export default function CriticalThinkingHub() {
     return (
         <div className="flex h-screen bg-slate-950 text-slate-200 font-sans overflow-hidden">
             <style>{customStyles}</style>
+            {/* Skip to content link for accessibility */}
+            <a href="#main-content" className="skip-link focus-ring">
+                Skip to main content
+            </a>
             <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
-            <div className="flex-1 overflow-y-auto overflow-x-hidden bg-gradient-to-br from-slate-950 to-slate-900 relative pt-16 md:pt-0">
+            <main
+                id="main-content"
+                className="flex-1 overflow-y-auto overflow-x-hidden bg-gradient-to-br from-slate-950 to-slate-900 relative pt-16 md:pt-0"
+                role="main"
+                aria-label="Main content"
+            >
                 <div className="min-h-full flex flex-col">
-                    <div className="flex-1">
+                    <div className="flex-1 animate-fadeIn" key={activeTab}>
                         {renderContent()}
                     </div>
 
@@ -1440,7 +1577,7 @@ export default function CriticalThinkingHub() {
                         </div>
                     </footer>
                 </div>
-            </div>
+            </main>
         </div>
     );
 }
